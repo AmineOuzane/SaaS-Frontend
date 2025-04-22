@@ -1,0 +1,105 @@
+/* Adjust these styles as desired to fit the login page */
+
+.login-container {
+    /* Same as register-container */
+    min-height: 100vh;
+    height: 100vh;
+    background-image: url('../../src/images/backgroundRegister.jpg'); /* Clear Background */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .login-form-container {
+    /* Same as register-form-container, but adjust width and background if needed */
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    padding: 30px;
+    border-radius: 15px;
+    width: 450px;
+    text-align: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Adjust form element styles as needed */
+  .login-form-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .login-form-container p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+    font-weight: 300;
+  }
+  
+  .register-form-container div {
+    margin-bottom: 20px;
+  }
+  
+  .register-form-container label {
+    display: block;
+    text-align: left !important;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #444;
+  }
+  
+  .login-form-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #daece6;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  button:hover {
+    background-color: #27acac;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #f1eaea;
+    transform: translateY(-7px);
+  }
+  
+  button:active {
+    transform: translateY(-1px);
+  }
+  
+  a {
+    text-decoration: none;
+    font-style: italic;
+    text-decoration: wavy;
+    color: #23c483;
+  }
+  
+  a:hover {
+    font-style: normal;
+    font-weight: bold;
+  }
