@@ -1,20 +1,35 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Register from './component/Register';
-import Login from './component/Login';
+// src/App.js
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import Layout from './component/Layout'
 
+// page imports:
+import HomePage from './Pages/HomePage'
+import LoginPage from './component/Login'
+import RegisterPage from './component/Register'
+import ProfilDetails from './component/ProfilDetails'
 
 function App() {
   return (
-
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/register" />} /> {/* Redirect root to /register */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        {/* root → redirect to /home */}
+        <Route path="/" element={<Navigate to="/home" replace />} />
+
+        {/* pages without navbar */}
+        <Route path="/login"  element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        {/* pages with navbar */}
+        <Route element={<Layout />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/profil" element={<ProfilDetails />} />
+
+          {/* you can add more “pages” here */}
+        </Route>
       </Routes>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

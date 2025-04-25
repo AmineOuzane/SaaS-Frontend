@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css';
+import '../../src/styles/Login.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    usernameOrEmail: '', // Combined field for username or email
+    username: '',
     password: '',
   });
 
   const [errors, setErrors] = useState({});
-  const API_BASE_URL = 'http://localhost:8083'; // Make sure to adjust this if needed
+  const API_BASE_URL = 'http://localhost:8083'; // à ajuster si nécessaire
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,23 +28,33 @@ const Login = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       try {
-        // Make API call to the login endpoint             the login is not yet configured 
-        const response = await axios.post(`${API_BASE_URL}/login`, formData); 
-        console.log('Login successful:', response.data);
-        alert('Login successful!'); // Provide user feedback
+        // Convertir les données en format application/x-www-form-urlencoded
+        const params = new URLSearchParams();
+        params.append('username', formData.username);
+        params.append('password', formData.password);
 
-        // Optionally, store the authentication token or user information
-        // in local storage or a context provider.
+        const response = await axios.post(`${API_BASE_URL}/auth/login`, params, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        });
 
-        // Reset the form after successful submission
+        if (response.data && response.data.access_token) {
+          // Stocker le JWT dans localStorage
+          localStorage.setItem('access_token', response.data.access_token);
+          alert('Login successful!');
+          window.location.href = '/'; // Redirection vers la page d'accueil ou la page protégée
+        } else {
+          alert('Login failed: No token received');
+        }
+
         setFormData({
-          usernameOrEmail: '',
+          username: '',
           password: '',
         });
         setErrors({});
       } catch (error) {
         console.error('Login failed:', error.response ? error.response.data : error.message);
-        // Provide user feedback
         alert(`Login failed: ${error.response ? JSON.stringify(error.response.data) : error.message}`);
       }
     } else {
@@ -54,36 +64,34 @@ const Login = () => {
 
   const validateForm = (data) => {
     let errors = {};
-
-    if (!data.usernameOrEmail) {
-      errors.usernameOrEmail = 'Username or Email is required';
+    if (!data.username) {
+      errors.username = 'Username is required';
     }
-
     if (!data.password) {
       errors.password = 'Password is required';
     }
-
     return errors;
   };
 
   return (
-    <div className="login-container">
+    <div className="login-page">
+      <div className="login-container">
       <div className="login-form-container">
         <h1>Login</h1>
         <p>Welcome back!</p>
         <form onSubmit={handleSubmit}>
-
           <div>
-            <label htmlFor="usernameOrEmail">Username or Email:</label>
+            <label htmlFor="username">Username:</label>
             <input
               type="text"
-              id="usernameOrEmail"
-              name="usernameOrEmail"
-              value={formData.usernameOrEmail}
+              id="username"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
             />
-            {errors.usernameOrEmail && <p className="error-message">{errors.usernameOrEmail}</p>}
+            {errors.username && <p className="error-message">{errors.username}</p>}
           </div>
+
           <div>
             <label htmlFor="password">Password:</label>
             <input
@@ -95,11 +103,13 @@ const Login = () => {
             />
             {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
+
           <button type="submit">Login</button>
           <p>
-            Don't have an account? <Link to="/register">Register</Link> 
+            Don't have an account? <Link to="/register">Register</Link>
           </p>
         </form>
+      </div>
       </div>
     </div>
   );

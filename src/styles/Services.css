@@ -1,0 +1,69 @@
+/* Example content for Services.css (Adjust as needed) */
+
+.services-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .service-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards try to maintain similar height */
+    min-height: 250px; /* Example minimum height */
+  }
+  
+  .service-banner {
+    height: 8px;
+    width: 100%;
+  }
+  
+  .service-content {
+    padding: 1rem 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .service-content h5 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .service-content p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+  }
+
+  .image-with-white-bg{
+    mix-blend-mode: multiply;
+    /* Other styles like width, height */
+    display: block; /* Important for blending */  
+  }
+
+  .h5{
+    font-weight: bold;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    .service-card {
+        width: 60%; 
+        margin-left: auto;   
+        margin-right: auto;
+    }
+
+    .image-with-white-bg {
+        width: 70%; 
+    }
+}
+  

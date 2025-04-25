@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Register.css';
+import '../../src/styles/Register.css'; // Make sure the CSS file is still imported
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     telephone: '',
@@ -32,10 +33,11 @@ const Register = () => {
     if (Object.keys(validationErrors).length === 0) {
       try {
         // Make API call to your backend (replace with your actual endpoint)
-        const response = await axios.post('http://localhost:8083/registerClient', formData); // Send the entire formData object
+        const response = await axios.post('http://localhost:8083/registerUser', formData); // Send the entire formData object
 
         console.log('Client created successfully:', response.data);
         alert('Registration successful!'); // Give user feedback
+        navigate('/login');
 
         // Reset the form after successful submission
         setFormData({
@@ -89,47 +91,56 @@ const Register = () => {
   };
 
   return (
+    <div className="register-page"> {/* Add this wrapper class */}
     <div className="register-container">
       <div className="register-form-container">
         <h1>Register</h1>
         <p>Create your account</p>
         <form onSubmit={handleSubmit}>
-        <div>
+          <div>
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} />
             {errors.username && <p className="error-message">{errors.username}</p>}
           </div>
-          <div>
-            <label htmlFor="telephone">Phone Number:</label>
-            <input type="text" id="telephone" name="telephone" value={formData.telephone} onChange={handleChange} />
-            {errors.telephone && <p className="error-message">{errors.telephone}</p>}
+
+          <div className="two-inputs-row"> {/* Phone and Company Name Row */}
+            <div>
+              <label htmlFor="telephone">Phone Number:</label>
+              <input type="text" id="telephone" name="telephone" value={formData.telephone} onChange={handleChange} />
+              {errors.telephone && <p className="error-message">{errors.telephone}</p>}
+            </div>
+            <div>
+              <label htmlFor="companyname">Company Name:</label>
+              <input type="text" id="companyname" name="companyname" value={formData.companyname} onChange={handleChange} />
+              {errors.companyname && <p className="error-message">{errors.companyname}</p>}
+            </div>
           </div>
-          <div>
-            <label htmlFor="companyname">Company Name:</label>
-            <input type="text" id="companyname" name="companyname" value={formData.companyname} onChange={handleChange} />
-            {errors.companyname && <p className="error-message">{errors.companyname}</p>}
-          </div>
+
           <div>
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
             {errors.email && <p className="error-message">{errors.email}</p>}
           </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
-            {errors.password && <p className="error-message">{errors.password}</p>}
+
+          <div className="two-inputs-row"> {/* Password and Confirm Password Row */}
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
+              {errors.password && <p className="error-message">{errors.password}</p>}
+            </div>
+            <div>
+              <label htmlFor="confirm_password">Confirm Password:</label>
+              <input type="password" id="confirm_password" name="confirm_password" value={formData.confirm_password} onChange={handleChange} />
+              {errors.confirm_password && <p className="error-message">{errors.confirm_password}</p>}
+            </div>
           </div>
-          <div>
-            <label htmlFor="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" value={formData.confirm_password} onChange={handleChange} />
-            {errors.confirm_password && <p className="error-message">{errors.confirm_password}</p>}
-          </div>
-          
+
           <button type="submit">Register</button>
           <p>
             Already have an account? <Link to="/login">Login</Link>
-          </p>
+          </p> 
         </form>
+      </div>
       </div>
     </div>
   );

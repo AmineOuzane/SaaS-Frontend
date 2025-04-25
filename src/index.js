@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { MantineProvider } from '@mantine/core'; // Import Provider
 import './index.css';
 import App from './App';
+import './styles/embla.css';
 import reportWebVitals from './reportWebVitals';
+import '@mantine/core/styles.css'; // Import Mantine core styles HERE
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <App />
+    </MantineProvider>
+
   </React.StrictMode>
 );
 
