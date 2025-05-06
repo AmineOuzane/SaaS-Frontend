@@ -8,6 +8,9 @@ import HomePage from './Pages/HomePage'
 import LoginPage from './component/Login'
 import RegisterPage from './component/Register'
 import ProfilDetails from './component/ProfilDetails'
+import ApiPage from './Pages/ApiPage'
+
+
 
 function App() {
   return (
@@ -24,6 +27,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/profil" element={<ProfilDetails />} />
+          <Route path="/apipage" element={<ApiPage />} />          
+          
 
           {/* you can add more “pages” here */}
         </Route>

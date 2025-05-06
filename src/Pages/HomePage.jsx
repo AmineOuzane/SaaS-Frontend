@@ -4,7 +4,7 @@ import Slider from '../component/Slider'
 import PaiementCard from '../component/PaiementCard'
 import Services from '../component/Services'
 import Footer from '../component/Footer'
-
+import GetStarted from '../component/getStarted'
 
 export default function HomePage() {
   return (
@@ -14,8 +14,7 @@ export default function HomePage() {
 
       {/* 2. Payment card */}
       <section className="mt-8 px-4 mx-auto max-w-4xl">
-        <h2 className="text-center text-2xl font-bold mb-4 ">Plan d'abonnement</h2>
-        <PaiementCard />
+        <GetStarted />
         <h2 className="text-center text-2xl font-bold mb-4">Nos Services</h2>
         <Services />
       </section>

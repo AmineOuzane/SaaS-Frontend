@@ -1,0 +1,83 @@
+/* Main container styles */
+/* This will be applied to the outer div */
+.responsive-container {
+    display: flex;
+    flex-direction: column; /* Stack children by default (mobile-first) */
+    gap: 16px; /* Adds space between items */
+    padding: 16px; /* Padding around the container */
+    background-color: white; /* White background */
+    align-items: center; /* Vertically center items when stacked (adjust if needed) */  
+
+}
+  
+  /* Styles for larger screens (e.g., 768px and up, Tailwind's 'md' breakpoint) */
+  @media (min-width: 768px) {
+    .responsive-container {
+      flex-direction: row; /* Arrange children horizontally */
+      gap: 32px; /* Increase space between items on larger screens */
+      padding: 24px; /* Increase padding on larger screens */
+      align-items: flex-start; /* Align items to the top when side-by-side (adjust if needed) */
+    }
+  }
+  
+  /* Styles for the content divs (image and text) */
+  /* Applied to both the image wrapper div and the text div */
+  .content-block {
+    width: 100%; /* Take full width on small screens */
+    margin-right: 25px;
+}
+  
+  /* Styles for larger screens for content divs */
+  @media (min-width: 768px) {
+    .content-block {
+      width: 50%; /* Take half width on larger screens */
+    }
+  }
+  
+  /* Styles specifically for the image wrapper div */
+  .image-block {
+    flex-shrink: 0; /* Prevent this block from shrinking */
+  }
+  
+  /* Basic image styling */
+  /* Applied to the img tag inside .image-block */
+  .responsive-image {
+    max-width: 100%; /* Ensure image doesn't overflow its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Helps with layout consistency */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+  }
+  
+  /* Basic text content styling */
+  /* Applied to the div containing the text */
+  .text-block {
+    color: #4a5568; /* Dark gray text color */
+    margin-left: 30px;
+  }
+  
+  /* Styles for the heading inside the text block */
+  .text-block h2 {
+    font-size: 1.25rem; /* 20px, standard text-xl */
+    font-weight: 600; /* Semibold */
+    margin-bottom: 8px; /* Space below heading */
+    color: #1a202c; /* Even darker gray for heading */
+  }
+  
+  /* Styles for paragraphs inside the text block */
+  .text-block p {
+    font-size: 1rem; /* 16px, standard text-base */
+    line-height: 1.5; /* Standard line height */
+    margin-bottom: 8px; /* Add space between paragraphs */
+  }
+  
+  /* Adjust bottom margin for the last paragraph if needed */
+  .text-block p:last-child {
+      margin-bottom: 0;
+  }
+  
+  /* Add more specific text styles here */
+  .text-block .smaller-text {
+    font-size: 0.875rem; /* 14px, standard text-sm */
+    margin-top: 8px; /* Space above this specific paragraph */
+  }

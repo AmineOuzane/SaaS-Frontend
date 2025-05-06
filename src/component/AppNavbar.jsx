@@ -56,7 +56,11 @@ const AppNavbar = () => {
     { name: "Log Out", action: handleLogout }, // Action defined
   ];
 
-  const servicesItems = [ /* ... */ ];
+  const servicesItems = [ 
+    "Demande d'approbation",
+    "OTP",
+    "Marketing SMS"
+   ];
 
 
   return (

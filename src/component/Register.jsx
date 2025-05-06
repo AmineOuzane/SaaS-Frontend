@@ -8,13 +8,13 @@ const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
     telephone: '',
-    companyname: '',
+    companyName: '', // <<< Change to camelCase 'companyName'
     email: '',
     password: '',
     confirm_password: '',
   });
 
-  const [errors, setErrors] = useState({}); // State for validation errors
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,27 +32,38 @@ const Register = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       try {
-        // Make API call to your backend (replace with your actual endpoint)
-        const response = await axios.post('http://localhost:8083/registerUser', formData); // Send the entire formData object
+        const response = await axios.post('http://localhost:8083/registerUser', formData);
 
         console.log('Client created successfully:', response.data);
-        alert('Registration successful!'); // Give user feedback
+        alert('Registration successful!');
         navigate('/login');
 
-        // Reset the form after successful submission
         setFormData({
           username: '',
           telephone: '',
-          companyname: '',
+          companyName: '', // <<< Change here too
           email: '',
           password: '',
           confirm_password: '',
         });
-        setErrors({}); // Clear errors
+        setErrors({});
       } catch (error) {
-        console.error('Error creating client:', error.response ? error.response.data : error.message);
-        // Display error message to the user
-        alert(`Registration failed: ${error.response ? JSON.stringify(error.response.data) : error.message}`);
+         console.error('Error creating client:', error.response ? error.response.data : error.message);
+         // It's better to parse the error response if it's JSON
+         let errorMessage = error.message;
+         if (error.response && error.response.data) {
+             try {
+                 // Attempt to parse Spring's default error response structure
+                 if (error.response.data.message) {
+                      errorMessage = error.response.data.message;
+                 } else {
+                      errorMessage = JSON.stringify(error.response.data);
+                 }
+             } catch (jsonError) {
+                 errorMessage = error.response.data.toString();
+             }
+         }
+         alert(`Registration failed: ${errorMessage}`);
       }
     } else {
       console.log('Form has errors');
@@ -68,8 +79,8 @@ const Register = () => {
     if (!data.telephone) {
       errors.telephone = 'Phone Number is required';
     }
-    if (!data.companyname) {
-      errors.companyname = 'Company Name is required';
+    if (!data.companyName) { // <<< Change here too
+      errors.companyName = 'Company Name is required'; // <<< Change here too
     }
     if (!data.email) {
       errors.email = 'Email is required';
@@ -91,7 +102,7 @@ const Register = () => {
   };
 
   return (
-    <div className="register-page"> {/* Add this wrapper class */}
+    <div className="register-page">
     <div className="register-container">
       <div className="register-form-container">
         <h1>Register</h1>
@@ -103,16 +114,16 @@ const Register = () => {
             {errors.username && <p className="error-message">{errors.username}</p>}
           </div>
 
-          <div className="two-inputs-row"> {/* Phone and Company Name Row */}
+          <div className="two-inputs-row">
             <div>
               <label htmlFor="telephone">Phone Number:</label>
               <input type="text" id="telephone" name="telephone" value={formData.telephone} onChange={handleChange} />
               {errors.telephone && <p className="error-message">{errors.telephone}</p>}
             </div>
             <div>
-              <label htmlFor="companyname">Company Name:</label>
-              <input type="text" id="companyname" name="companyname" value={formData.companyname} onChange={handleChange} />
-              {errors.companyname && <p className="error-message">{errors.companyname}</p>}
+              <label htmlFor="companyName">Company Name:</label> {/* <<< Change htmlFor */}
+              <input type="text" id="companyName" name="companyName" value={formData.companyName} onChange={handleChange} /> {/* <<< Change id and name */}
+              {errors.companyName && <p className="error-message">{errors.companyName}</p>} {/* <<< Change error key */}
             </div>
           </div>
 
@@ -122,7 +133,7 @@ const Register = () => {
             {errors.email && <p className="error-message">{errors.email}</p>}
           </div>
 
-          <div className="two-inputs-row"> {/* Password and Confirm Password Row */}
+          <div className="two-inputs-row">
             <div>
               <label htmlFor="password">Password:</label>
               <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
@@ -138,7 +149,7 @@ const Register = () => {
           <button type="submit">Register</button>
           <p>
             Already have an account? <Link to="/login">Login</Link>
-          </p> 
+          </p>
         </form>
       </div>
       </div>

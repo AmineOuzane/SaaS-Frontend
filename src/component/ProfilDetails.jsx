@@ -223,7 +223,9 @@ const ProfilDetails = () => {
   if (profileData) {
     return (
       <div style={{ padding: '20px', border: '1px solid #eee', margin: '20px', borderRadius: '8px' }}>
-        <h1>Your Profile</h1>
+        <h1 className="text-center text-2xl font-bold mb-6 text-gray-800">
+        My Profile
+        </h1>        
         {/* Display data based on what AppUser object contains */}
         <div className="max-w-md mx-auto p-4">
             <table className="table-auto w-full">
@@ -238,11 +240,19 @@ const ProfilDetails = () => {
                 </tr>
                 <tr>
                     <th className="px-4 py-2">Company Name:</th>
-                    <td className="px-4 py-2">{profileData.phone || 'N/A'}</td>
+                    <td className="px-4 py-2">{profileData.companyName || 'N/A'}</td>
                 </tr>
                 <tr>
                     <th className="px-4 py-2">Telephone:</th>
                     <td className="px-4 py-2">{profileData.phone || 'N/A'}</td>
+                </tr>
+                <tr>
+                    <th className="px-4 py-2">Cagnotte: </th>
+                    <td className="px-4 py-2">{profileData.cagnotte || 'N/A'}$</td>
+                </tr>
+                <tr>
+                    <th className="px-4 py-2">Status du compte: </th>
+                    <td className="px-4 py-2">{profileData.isActive || 'N/A'} Active </td>
                 </tr>
                 </tbody>
             </table>
